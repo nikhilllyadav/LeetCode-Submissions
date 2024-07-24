@@ -1,33 +1,25 @@
+#include<bits/stdc++.h>
 class Solution {
 public:
-    bool linearSearch(vector<int>&nums, int num) {
-        int n = nums.size(); //size of array
-        for (int i = 0; i < n; i++) {
-            if (nums[i] == num)
-                return true;
-        }
-        return false;
-    }
     int longestConsecutive(vector<int>& nums) {
-        if (nums.empty()) {
-            return 0; // Return 0 if the input array is empty
+        int n=nums.size();
+        if(n==0) return 0;
+        int longest=1;
+        unordered_set<int> set;
+        for(int i=0;i<nums.size();i++){
+            set.insert(nums[i]);   //sare unique elements set me chle gye
         }
-        int n = nums.size(); //size of array
-        int longest = 1;
-        //pick a element and search for its
-        //consecutive numbers:
-        for (int i = 0; i < n; i++) {
-            int x = nums[i];
-            int cnt = 1;
-            //search for consecutive numbers
-            //using linear search:
-            while (linearSearch(nums, x + 1) == true) {
-                x += 1;
-                cnt += 1;
+        for(auto it : set){
+            if(set.find(it-1)==set.end()){//agr prev consecutive element set me nahi hai 
+                int count = 1;
+                int x = it;
+                while(set.find(x+1)!=set.end()){//agr next consecutive element set me hai
+                    count=count+1;
+                    x=x+1;
+                }
+                longest=max(longest,count);
             }
-
-            longest = max(longest, cnt);
         }
-        return longest; 
+        return longest;
     }
 };
