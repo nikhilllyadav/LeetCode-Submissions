@@ -2,11 +2,15 @@ class Solution {
 public:
     int missingNumber(vector<int>& nums) {
         int n=nums.size();
-        int sum=0;
-        for(int i=0;i<nums.size();i++){
-            sum+=nums[i];
+        vector<int>hash(n+1,0);//n+1 size ka vector bnaya h initialised all elements with 0
+        for(int i=0;i<n;i++){
+            hash[nums[i]]++;
         }
-        int totalsum= n*(n+1)/2;
-        return totalsum-sum;
+        for(int i=0;i<=n;i++){ //make sure to put = sign as if u put < it will iterate only till second last element and not the last element
+            if(hash[i]==0){
+                return i;
+            }
+        }
+        return -1;
     }
 };
