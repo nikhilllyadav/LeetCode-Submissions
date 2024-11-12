@@ -21,7 +21,6 @@ public:
                 return true; //slow fast pointers met, means cycle exists
             }
         }
-        return false;        
+        return false; 
     }
 };
-
